@@ -35,6 +35,10 @@ export default class SignUpForm extends Component {
     this.submit = this.submit.bind(this);
   }
 
+  componentDidMount() {
+    analytics.page('Signup');
+  }
+
   openEula(event) {
     event.preventDefault();
     this.setState({ showEula: true });
@@ -60,6 +64,9 @@ export default class SignUpForm extends Component {
       client.api.createUser(credentials).then((user) => {
         axios.post(BILLING_URL + '/credits/signups', referral)
           .then((res) => {
+            console.log('res', res);
+            analytics.identify()
+            analytics.track('User Signup')
             hashHistory.push('/signup-success');
             return resolve(user, res);
           })
@@ -148,7 +155,7 @@ export default class SignUpForm extends Component {
                           name="eula"
                           {...eula}
                         />
-                        I agree to the 
+                        I agree to the
                         <a href="#noop" onClick={this.openEula.bind(this)}>
                           Terms of Service
                         </a>
@@ -159,7 +166,7 @@ export default class SignUpForm extends Component {
                     {eula.error && eula.touched && <div><span className="text-danger">{eula.error}</span></div>}
                   </form>
                 </div>
-                <p>Already have an account? 
+                <p>Already have an account?
                   <IndexLink to="/" className="login">Log In</IndexLink>
                 </p>
               </div>

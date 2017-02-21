@@ -46,6 +46,10 @@ export default class LoginForm extends Component {
     }
   }
 
+  componentDidMount() {
+    analytics.page('Login');
+  }
+
   header() {
     const {location: {query: {passwordReset}}} = this.props;
 
@@ -75,6 +79,7 @@ export default class LoginForm extends Component {
 
       client.api.addPublicKey(keypair.getPublicKey()).then(
         function success() {
+          analytics.track('User Login');
           client.removeBasicAuth();
           if (window && window.localStorage) {
             window.localStorage.setItem('privkey', keypair.getPrivateKey());

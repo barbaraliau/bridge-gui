@@ -26,6 +26,10 @@ export default class PasswordReset extends Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    analytics.page('Password Reset');
+  }
+
   submit() {
     const email    = this.props.fields.email.value;
     const password = this.props.fields.password.value;

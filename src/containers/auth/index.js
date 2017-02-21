@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import 'containers/auth//auth.scss';
 
 export default class Login extends Component {
+
   render() {
     return(
       <section className="auth">

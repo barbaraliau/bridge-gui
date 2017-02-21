@@ -20,22 +20,22 @@ const mapDispatchToProps = (dispatch) => ({
 export default class Dashboard extends Component {
   static propTypes = {
     logout: PropTypes.func.isRequired
-  };
+  }
 
   handleLogout(e) {
     e.preventDefault();
     client.api.destroyPublicKey(client.api._options.keypair.getPublicKey())
-      .then(logout, logout)
+      .then(logout, logout);
 
-    function logout(){
-      if(window && window.localStorage) {
+    function logout() {
+      if (window && window.localStorage) {
         window.localStorage.removeItem('privkey');
         window.localStorage.removeItem('email');
       }
       client.removeKeyPair();
       hashHistory.push('/');
     }
-  };
+  }
 
   render() {
     const email = this.props.userEmail;
