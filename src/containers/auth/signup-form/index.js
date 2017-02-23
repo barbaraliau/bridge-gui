@@ -36,7 +36,7 @@ export default class SignUpForm extends Component {
   }
 
   componentDidMount() {
-    analytics.page('Signup');
+    analytics.page('Sign Up');
   }
 
   openEula(event) {
