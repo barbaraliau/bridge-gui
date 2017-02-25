@@ -97,8 +97,11 @@ const mapDispatchToProps = {
   setUsage
 };
 
-const mapStateToProps = ({transactionGroup: {balance, usage}}) => {
-  return {balance, usage};
+const mapStateToProps = ({ transactionGroup: {balance, usage} }) => {
+  return {
+    balance,
+    usage
+  };
 };
 
 let globalCounter = 0;
@@ -281,13 +284,16 @@ export default class Billing extends Component {
       refetch, paymentProcessor: {
       id: paymentProcessorId,
       defaultPaymentMethod: {id: paymentMethodId}
-    }
+      }
     } = this.props.paymentProcessor;
 
     removeCard(
       paymentProcessorId,
       paymentMethodId
-    ).then(() => (refetch()));
+    ).then(() => ({
+      analytics.track('Removed Credit Card');
+      return refetch());
+    });
   }
 
   render() {
