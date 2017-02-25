@@ -149,16 +149,23 @@ export default class SignUpForm extends Component {
 
                     <div className="form-group checkbox">
                       <label>
+                        <p>
                         <input
                           type="checkbox"
                           className="text-right"
                           name="eula"
                           {...eula}
                         />
+<<<<<<< HEAD
                         I agree to the
                         <a href="#noop" onClick={this.openEula.bind(this)}>
                           Terms of Service
                         </a>
+=======
+                        I agree to the&nbsp;
+                          <a href="#noop" onClick={this.openEula.bind(this)}>Terms of Service </a>
+                        </p>
+>>>>>>> master
                       </label>
                     </div>
 
@@ -166,7 +173,11 @@ export default class SignUpForm extends Component {
                     {eula.error && eula.touched && <div><span className="text-danger">{eula.error}</span></div>}
                   </form>
                 </div>
+<<<<<<< HEAD
                 <p>Already have an account?
+=======
+                <p>Already have an account?&nbsp;
+>>>>>>> master
                   <IndexLink to="/" className="login">Log In</IndexLink>
                 </p>
               </div>
