@@ -56,17 +56,25 @@ export default class SignUpForm extends Component {
         redirect: 'https://app.storj.io/'
       };
 
+      const referralLink = this.props.location.query.referralLink;
+
       const referral = {
-        referralLink: this.props.location.query.referralLink,
+        referralLink,
         email: this.props.fields.email.value
       }
 
       client.api.createUser(credentials).then((user) => {
         axios.post(BILLING_URL + '/credits/signups', referral)
           .then((res) => {
-            console.log('res', res);
-            analytics.identify()
-            analytics.track('User Signup')
+            // console.log('res', res);
+            analytics.identify();
+
+            if (referralLink) {
+              analytics.track('Referral Sign Up');
+            } else {
+              analytics.track('Regular Sign Up');
+            }
+
             hashHistory.push('/signup-success');
             return resolve(user, res);
           })
@@ -156,16 +164,9 @@ export default class SignUpForm extends Component {
                           name="eula"
                           {...eula}
                         />
-<<<<<<< HEAD
-                        I agree to the
-                        <a href="#noop" onClick={this.openEula.bind(this)}>
-                          Terms of Service
-                        </a>
-=======
                         I agree to the&nbsp;
                           <a href="#noop" onClick={this.openEula.bind(this)}>Terms of Service </a>
                         </p>
->>>>>>> master
                       </label>
                     </div>
 
@@ -173,11 +174,7 @@ export default class SignUpForm extends Component {
                     {eula.error && eula.touched && <div><span className="text-danger">{eula.error}</span></div>}
                   </form>
                 </div>
-<<<<<<< HEAD
-                <p>Already have an account?
-=======
                 <p>Already have an account?&nbsp;
->>>>>>> master
                   <IndexLink to="/" className="login">Log In</IndexLink>
                 </p>
               </div>
