@@ -178,7 +178,8 @@ export default class Billing extends Component {
       const storageInGB = roundToGBAmount(storage, 'bytes');
       const averageStorage = this.getAverage(storageInGB, debits.length);
       const prettyStorage = setToTwoDecimalPlaces(averageStorage);
-      this.props.setStorage(prettyStorage !== 'NaN' ? prettyStorage : '0.00');
+      const setToStorage = prettyStorage !== 'NaN' ? prettyStorage : '0.00'
+      this.props.setStorage(setToStorage);
 
       // Set Bandwidth
       const bandwidth = this.getSum(debits, 'bandwidth');
